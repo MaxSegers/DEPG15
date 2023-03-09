@@ -27,7 +27,7 @@ vluchtroutes = {
 
 # Enkele datumvariabelen
 current_date = datetime.datetime.now().strftime("%Y-%m-%d")
-end_date = datetime.datetime(2023, 6, 1)
+end_date = datetime.datetime(2023, 10, 1)
 
 
 # --- Data van de webpagina halen ---
@@ -36,7 +36,7 @@ for key, values in vluchtroutes.items():
     for value in values:
 
         # Startdatum van de periode die we willen scrapen + statische startdatum die niet verandert om vluchten voor april eruit te filteren
-        start_date = datetime.datetime(2023, 5, 1)
+        start_date = datetime.datetime(2023, 4, 1)
         static_start_date = start_date
 
         while start_date <= end_date:
@@ -83,7 +83,7 @@ for key, values in vluchtroutes.items():
                     flight_available = True
 
                 if flight_available:
-                    with open(f'C:/Users/Maxime/Desktop/MT2_Sem2/DataEngineeringProject/Scripts/csv/TUI_{key}_{value}.csv', 'a', newline='\n') as csvBestand:
+                    with open(f"DEPG15/TUI/csv_bestanden/TUI_{key}_{value}.csv", 'a', newline='\n') as csvBestand:
                         voegToe = csv.writer(csvBestand)
                         voegToe.writerow([current_date, dep_date, arr_date, dep_time, arr_time, depAirport, arrAirport,
                         duration, journeyType, full_flnr, availableSeats, price, flight_key])
