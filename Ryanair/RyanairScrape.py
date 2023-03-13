@@ -12,7 +12,6 @@ vluchtroutes = {
     "BRU": ("ALC", "AGP", "PMI")
 }
 
-
 # datums
 search_date = datetime.datetime.now().strftime("%Y-%m-%d")
 end_date = datetime.datetime(2023, 10, 1)
@@ -27,7 +26,7 @@ for vertrekplaats, bestemmingen in vluchtroutes.items():
             datum = start_date.strftime("%Y-%m-%d")
             print(vertrekplaats, bestemming, datum)
 
-            URL = f"https://www.ryanair.com/api/booking/v4/nl-nl/availability?ADT=1&CHD=0&DateOut={datum}&Destination={bestemming}&Disc=0&INF=0&Origin={vertrekplaats}&TEEN=0&promoCode=&IncludeConnectingFlights=false&RoundTrip=false&ToUs=AGREED"
+            URL = f"https://www.ryanair.com/api/booking/v4/nl-nl/availability?ADT=1&CHD=0&DateOut={datum}&Destination={bestemming}&Disc=0&INF=0&Origin={vertrekplaats}&TEEN=0&promoCode=&IncludeConnectingFlights=true&RoundTrip=false&ToUs=AGREED"
 
             # HTML object uit webpagina halen
             # error handling zodat programma niet afsluit bij een error
@@ -62,9 +61,9 @@ for vertrekplaats, bestemmingen in vluchtroutes.items():
 
             # data uit json object halen
             for trips in (json_object['trips']):
-                departure_airport, departure_aircode = (
+                departure_aircode, departure_airport = (
                     trips['origin']), trips['originName']
-                arrival_airport, arrival_aircode = trips['destination'], trips['destinationName']
+                arrival_aircode, arrival_airport = trips['destination'], trips['destinationName']
 
                 for dates in trips['dates']:
                     departure_date = dates['dateOut']
@@ -101,12 +100,14 @@ for vertrekplaats, bestemmingen in vluchtroutes.items():
 
                             flight_duration = segments['duration']
 
-            # als er vluchten zijn, dan deze toevoegen aan juiste csv vertrekplaats-bestemming
-            if flights_exist:
-                with open(f'../Scraping/Ryanair_{vertrekplaats}_{bestemming}.csv', 'a', newline='\n') as test_csv:
-                    test_csv_append = csv.writer(test_csv)
-                    test_csv_append.writerow(
-                        [search_date, departure_date, departure_time, arrival_date, arrival_time, price, flight_number, flight_duration, departure_airport, departure_aircode, arrival_airport, arrival_aircode, flight_key, seats_available])
+                            # als er vluchten zijn, schrijf dan naar csv
+                            if flights_exist:
+                                print("flight exists, writing ...")
+                                with open(f"DEPG15/Ryanair/csv_bestanden/Ryanair_{vertrekplaats}_{bestemming}.csv", 'a', newline='\n') as test_csv:
+                                    test_csv_append = csv.writer(test_csv)
+                                    test_csv_append.writerow(
+                                        ['Ryanair', search_date, departure_date, departure_time, arrival_date, arrival_time, departure_aircode, departure_airport,
+                                         arrival_aircode, arrival_airport, flight_duration, flight_number, seats_available, price, flight_key])
 
             # dag + 1 => volgende dag ophalen
             start_date += datetime.timedelta(days=1)
