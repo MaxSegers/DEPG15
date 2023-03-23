@@ -4,7 +4,7 @@
 
 - Vraag 1: Wanneer beginnen onze sprints exact, huidige maandag als startpunt of maandag 27/03
 - Vraag 2: Vragen over ERD
-- Vraag 3:
+- Vraag 3: Wat tegen volgende week?
 
 ## Vragen voor het project zelf:
 
