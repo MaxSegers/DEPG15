@@ -2,12 +2,12 @@
 
 ## Vragen voor Analyse:
 
-- Vraag 1:
-- Vraag 2:
-- Vraag 3:
+- Vraag 1: Wanneer beginnen onze sprints exact, huidige maandag als startpunt of maandag 27/03
+- Vraag 2: Vragen over ERD
+- Vraag 3: Wat tegen volgende week?
 
 ## Vragen voor het project zelf:
 
-- Vraag 1: Welke opties moeten wij aanduiden voor de virtuele machine op het vic? link: https://forms.microsoft.com/e/ZqF0qHpG1X
-- Vraag 2: Kunnen we meer dan één ssh-sleutel toevoegen, want hoe kunnen we anders met meerder pc's met de vm verbinden?
+- Vraag 1:
+- Vraag 2:
 - Vraag 3:

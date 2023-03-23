@@ -20,6 +20,6 @@ Databank:		data over vlucht zelf in aparte kolom zetten want deze veranderd niet
 			hoe los je een veranderd vertrek en aankomst uur op voor een vlucht (ipv 8 uur nu om 9 uur vertrekken)?
 			nadenken over elementen die normaal niet veranderen maar wel kunnen veranderen
 
-Kron gebruiken
+Cron gebruiken
 
 Docker container op sqlserver werkt op vm
