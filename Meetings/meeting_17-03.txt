@@ -1,0 +1,25 @@
+DEP
+
+subdomein:		(geen antwoord op gekregen) waarschijnlijk leeg want het is geen website
+
+open poorten:		Geen want er word gebruik gemaakt van een SSH tunnel
+
+SSH key:			1 key voor alle 3 (goed bijhouden dus)
+			volgens haar kan je zelf sleutels bijmaken als je de controle hebt
+
+Size: 			Small zal genoeg zijn
+
+Duur:			3 maand moet voldoende zijn
+
+Brussels airlines oplossing:	selenium stealth (https://pypi.org/project/selenium-stealth/)
+			Economy light tarieven nemen
+
+Databank:		data over vlucht zelf in aparte kolom zetten want deze veranderd niet elke dag
+			extra entiteit airport
+			vertrek en aankomstairport nog eens over nadenken
+			hoe los je een veranderd vertrek en aankomst uur op voor een vlucht (ipv 8 uur nu om 9 uur vertrekken)?
+			nadenken over elementen die normaal niet veranderen maar wel kunnen veranderen
+
+Cron gebruiken
+
+Docker container op sqlserver werkt op vm
