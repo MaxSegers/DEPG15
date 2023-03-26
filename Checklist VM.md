@@ -13,3 +13,15 @@
     - connection method: Standard tcp/ip over ssh
 
 - We zullen gewoon de git op de vm zetten zodat we makkelijk aan alle eerder gescrapte data kunnen en aan alle scripts, zo hebben we ook nieuwe versies indien er nog aanpassingen moeten gebeuren
+
+## Wat is er al gedaan?
+
+- [x] Toevoegen public keys
+- [ ] mysql + running bij opstart
+- [ ] Python 3 install
+- [ ] Selenium install
+- [ ] venv install
+- [ ] Git installeren, deze repo clonen
+- [ ] cron om de scripts te schedulen
+- [ ] Zorgen dat data in de databank komt
+- [ ] Vanuit windows verbinding leggen met mysql server op vm
