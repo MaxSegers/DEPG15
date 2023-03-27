@@ -9,19 +9,21 @@
 7. Script runnen + zorgen dat data in de databank komt
 8. cron om scripts te schedulen
 9. vanuit windows (mysql workbench) connecteren met mysql server op de vm
-    - nieuw blokje aanmaken
-    - connection method: Standard tcp/ip over ssh
+   - nieuw blokje aanmaken
+   - connection method: Standard tcp/ip over ssh
 
 - We zullen gewoon de git op de vm zetten zodat we makkelijk aan alle eerder gescrapte data kunnen en aan alle scripts, zo hebben we ook nieuwe versies indien er nog aanpassingen moeten gebeuren
 
 ## Wat is er al gedaan?
 
 - [x] Toevoegen public keys
-- [ ] mysql + running bij opstart
-- [ ] Python 3 install
+- [x] mysql + running bij opstart
+- [x] Python 3 install
 - [ ] Selenium install
-- [ ] venv install
-- [ ] Git installeren, deze repo clonen
+- [x] venv install
+      => source venv/bin/activate om aan te zetten
+      => deactivate om uit te zetten
+- [x] Git installeren, deze repo clonen
 - [ ] cron om de scripts te schedulen
 - [ ] Zorgen dat data in de databank komt
 - [ ] Vanuit windows verbinding leggen met mysql server op vm
