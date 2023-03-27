@@ -19,7 +19,7 @@ end_date = datetime.datetime(2023, 10, 1)
 # url opbouwen
 for vertrekplaats, bestemmingen in vluchtroutes.items():
     for bestemming in bestemmingen:
-        start_date = datetime.datetime(2023, 3, 1)
+        start_date = datetime.datetime.now()
 
         # data ophalen voor elke dag tussen start en einddatum
         while start_date <= end_date:
