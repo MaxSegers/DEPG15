@@ -51,19 +51,6 @@ INSERT INTO `airports` VALUES (13,'Alicante Airport','ALC','Alicante','Spain'),(
 (16,'Palma de Mallorca Airport','PMI','Palma','Spain'),(17,'Tenerife South Airport','TFS','Tenerife','Spain');
 UNLOCK TABLES;
 
-
---
--- Table structure for table `search_dates`
---
-
-DROP TABLE IF EXISTS `search_dates`;
-CREATE TABLE `search_dates` (
-  `search_date` date NOT NULL,
-  `price` INT NOT NULL,
-  `seats_available` INT NOT NULL,
-  PRIMARY KEY (`search_date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 --
 -- Table structure for table `flights`
 --
@@ -81,14 +68,25 @@ CREATE TABLE `flights` (
   `departure_airport_id` int UNSIGNED NOT NULL,
   `arrival_airport_id` int UNSIGNED NOT NULL,
   `airline_id` int UNSIGNED NOT NULL,
-  `search_date` date NOT NULL,
   PRIMARY KEY (`flight_key`),
   KEY `fk_flights_dep_airports` (`departure_airport_id`),
   KEY `fk_flights_arr_airports` (`arrival_airport_id`),
   KEY `fk_flights_airlines` (`airline_id`),
-  KEY `fk_flights_search_dates` (`search_date`),
   CONSTRAINT `fk_flights_dep_airports` FOREIGN KEY (`departure_airport_id`) REFERENCES `airports` (`airport_id`) ON DELETE CASCADE,
   CONSTRAINT `fk_flights_arr_airports` FOREIGN KEY (`arrival_airport_id`) REFERENCES `airports` (`airport_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_flights_airlines` FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`airline_id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_flights_search_dates` FOREIGN KEY (`search_date`) REFERENCES `search_dates` (`search_date`) ON DELETE CASCADE
+  CONSTRAINT `fk_flights_airlines` FOREIGN KEY (`airline_id`) REFERENCES `airlines` (`airline_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Table structure for table `search_dates`
+--
+
+DROP TABLE IF EXISTS `search_dates`;
+CREATE TABLE `search_dates` (
+  `search_date` date NOT NULL,
+  `price` INT NOT NULL,
+  `seats_available` INT NOT NULL,
+  `flight_key` varchar(255) NOT NULL,
+  PRIMARY KEY (`search_date`, `flight_key`),
+  FOREIGN KEY (`flight_key`) REFERENCES `flights` (`flight_key`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
