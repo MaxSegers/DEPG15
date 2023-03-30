@@ -28,7 +28,9 @@ try:
                 heading = next(file)
                 reader_obj = csv.reader(file)
                 for row in reader_obj:
-                    if row[0] == '2023-03-09':
+                    cursor.execute(f"SELECT * FROM flights WHERE flight_key = '{row[12]}'")
+                    data = cursor.fetchall()
+                    if not data:
                         
                         flight_type = 0 if row[8] == 'Direct' else 1
 
