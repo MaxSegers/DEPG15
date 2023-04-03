@@ -24,3 +24,21 @@
    - Ongeveer voor elke bestemming per luchtvaartmaatschappij een nieuwe proxy
 
 4. Zie 'Checklist VM' voor wat we nog met de vm moeten doen
+
+
+
+Eerste week paasvakantie gedeelde databank om resultaten in te zetten
+
+SQL schrijven om de data uit oltp te halen naar het datawarehouse
+
+isholiday
+naamholiday
+isweekend
+
+1. dimdate vullen
+2. dimairlines opvullen
+3. dimairports opvullen
+4. dimflights (slowly changing) opvullen
+5. fact table opvullen
+
+Miss cronjob om sql dump te maken van data om analyses lokaal uit te voeren
