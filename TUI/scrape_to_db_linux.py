@@ -7,7 +7,6 @@ from mysql.connector import Error
 
 import mysql.connector
 import json
-import csv
 import datetime
 
 path = "DEPG15/TUI/csv_bestanden"
@@ -15,7 +14,7 @@ airline_id = 2
 flight_type = ""
 
 try:
-    connection = mysql.connector.connect(host='vicuser@hogent.be:40082',
+    connection = mysql.connector.connect(host='localhost',
                                          database='vluchten',
                                          user='root',)
 
@@ -25,7 +24,7 @@ try:
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     # Locatie van chromedriver
-    PATH = "C:\Program Files (x86)\Google\chromedriver"
+    PATH = "/home/vicuser/venv/lib64/python3.9/site-packages/selenium/webdriver/chrome/webdriver.py"
     driver_service = Service(executable_path=PATH)
     driver = webdriver.Chrome(service=driver_service,options=options)
 
