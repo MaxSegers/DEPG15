@@ -26,7 +26,8 @@ vluchtroutes = {
 }
 
 # Enkele datumvariabelen
-current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+date = datetime.datetime.now()
+current_date = date.strftime("%Y-%m-%d")
 end_date = datetime.datetime(2023, 10, 1)
 
 
@@ -36,7 +37,7 @@ for key, values in vluchtroutes.items():
     for value in values:
 
         # Startdatum van de periode die we willen scrapen + statische startdatum die niet verandert om vluchten voor april eruit te filteren
-        start_date = datetime.datetime(2023, 4, 1)
+        start_date = date
         static_start_date = start_date
 
         while start_date <= end_date:
