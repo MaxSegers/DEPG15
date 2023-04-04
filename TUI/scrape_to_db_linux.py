@@ -21,10 +21,13 @@ try:
     cursor = connection.cursor()
     # Opties voor de scraper
     options = webdriver.ChromeOptions()
+    options.add_argument("--disable-dev-shm-usage"); # Overcome limited resource problems
+    options.add_argument("--no-sandbox"); # Bypass OS security model
+    options.add_argument('--headless')
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
     # Locatie van chromedriver
-    PATH = "/home/vicuser/venv/lib64/python3.9/site-packages/selenium/webdriver/chrome/webdriver.py"
+    PATH = "home/vicuser/venv/lib64/python3.9/site-packages/selenium/webdriver/chrome/webdriver.py"
     driver_service = Service(executable_path=PATH)
     driver = webdriver.Chrome(service=driver_service,options=options)
 
