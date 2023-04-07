@@ -33,10 +33,7 @@ try:
 
     # Dictionary met Vertrekplaatsen en de mogelijk bestemmingen per vertrekplaats
     vluchtroutes = {
-        "ANR": ("ALC"),
-        "BRU": ("CFU", "HER"),
-        "LGG": ("HER"),
-        "OST": ("HER", "RHO")
+        "ANR": ("ALC", "IBZ", "AGP", "PMI")
     }
 
     # Enkele datumvariabelen
@@ -63,7 +60,6 @@ try:
                 # De nieuwe datum in het juiste formaat in de URL steken
                 date_string = start_date.strftime("%Y-%m-%d")
                 url = f"http://www.tuifly.be/flight/nl/search?flyingFrom%5B%5D={key}&flyingTo%5B%5D={value}&depDate={date_string}&adults=1&children=0&childAge=&choiceSearch=true&searchType=pricegrid&nearByAirports=false&currency=EUR&isOneWay=true"
-                driver.implicitly_wait(50)
                 driver.get(url)
 
                 # Ophalen uit opmaak (element inspecteren)

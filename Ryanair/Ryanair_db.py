@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import requests
 from bs4 import BeautifulSoup
@@ -23,7 +23,7 @@ end_date = datetime.datetime(2023, 10, 1)
 # url opbouwen
 
 try:
-    connection = mysql.connector.connect(host='vicuser@hogent.be:40082',
+    connection = mysql.connector.connect(host='localhost',
                                          database='vluchten',
                                          user='root',
                                          )
