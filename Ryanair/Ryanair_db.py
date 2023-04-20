@@ -26,6 +26,7 @@ try:
     connection = mysql.connector.connect(host='localhost',
                                          database='vluchten',
                                          user='root',
+                                         password='S@1ExQ1693L'
                                          )
 
     cursor = connection.cursor()
