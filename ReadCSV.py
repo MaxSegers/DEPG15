@@ -33,9 +33,11 @@ try:
             # conn.reconnect is important, otherwise error
             conn.reconnect()
             cursor = conn.cursor()
+            print('reconnected')
 
             # Execute commands in file LoadFiles.sql to import data into database airfares
             with open('C:\\Users\\stalm\\OneDrive\\Documenten\\2022-2023\\Semester 2\\Data Engineering Project\\DEP_git\\DEPG15\\loadFiles.sql', 'r') as f:
+                print('executing sql')
                 cursor.execute(f.read(), multi=True)
             cursor.close()
 
