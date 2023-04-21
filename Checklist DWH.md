@@ -11,7 +11,7 @@
      1. dimdate vullen
      2. dimairlines opvullen
      3. dimairports opvullen
-     4. dimflights (slowly changing) opvullen
+     4. dimflights (slowly changing) opvullen (start en end)
      5. fact table opvullen
 
 3. Voor specifieke vragen mochten we haar altijd op teams/mail een bericht sturen. (Sabine De Vreese)
