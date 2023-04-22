@@ -60,9 +60,9 @@ CREATE TABLE `flight` (
   `flightnumber` varchar(10) NOT NULL,
   `departure_date` date NOT NULL,
   `arrival_date` date NOT NULL,
-  `departure_time` datetime NOT NULL,
-  `arrival_time` datetime NOT NULL,
-  `duration` int NOT NULL,
+  `departure_time` varchar(10) NOT NULL,
+  `arrival_time` varchar(10) NOT NULL,
+  `duration` varchar(10) NOT NULL,
   `number_of_stops` INT NOT NULL,
   `airline_iata_code` varchar(10) NOT NULL,
   `departure_airport_iata_code` varchar(10) NOT NULL,
@@ -84,7 +84,7 @@ DROP TABLE IF EXISTS `search_dates`;
 CREATE TABLE `search_dates` (
   `scrape_date` date NOT NULL,
   `seats_available` INT NOT NULL,
-  `price` INT NOT NULL,
+  `price` double NOT NULL,
   `flight_id` varchar(255) NOT NULL,
   PRIMARY KEY (`scrape_date`, `flight_id`),
   FOREIGN KEY (`flight_id`) REFERENCES `flight` (`flight_id`) ON DELETE CASCADE
