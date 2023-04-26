@@ -1,3 +1,4 @@
+UNLOCK TABLES;
 DROP DATABASE IF EXISTS AirFaresDWH;
 CREATE DATABASE IF NOT EXISTS AirFaresDWH;
 USE AirFaresDWH;
@@ -5,25 +6,26 @@ USE AirFaresDWH;
 -- creating tables with their primary keys and relations between them
 
 CREATE TABLE IF NOT EXISTS Dim_Airline (
-  airline_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  airline_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  airline_iata_code VARCHAR(10) NOT NULL,
   airline_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Dim_Airport (
   airport_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  airport_iata_code VARCHAR(10) NOT NULL,
   airport_name VARCHAR(50) NOT NULL,
-  airport_code VARCHAR(10) NOT NULL,
   city varchar(255) NOT NULL,
   country varchar(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Dim_Flight (
   flight_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  flight_key varchar(255) NOT NULL,
+  flight_code varchar(255) NOT NULL,
+  flight_number varchar(10) NOT NULL,
   arrival_time DATETIME NOT NULL,
   departure_time DATETIME NOT NULL,
   flight_duration int NOT NULL,
-  flight_number varchar(10) NOT NULL,
   layovers INT NOT NULL,
   available_seats INT NOT NULL,
   price DOUBLE NOT NULL,
@@ -41,8 +43,8 @@ CREATE TABLE IF NOT EXISTS Dim_Date (
 );
 
 CREATE TABLE IF NOT EXISTS Fact_Flight (
-factFlight_key INT NOT NULL PRIMARY KEY,
-airline_key INT UNSIGNED NOT NULL,
+factFlight_key INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+airline_key INT NOT NULL,
 dep_airport_key INT NOT NULL,
 arr_airport_key INT NOT NULL,
 flight_key INT NOT NULL,
@@ -76,15 +78,15 @@ REFERENCES AirFaresDWH.Dim_Date(date_key)
 -- filling up predetermined columns
 
 LOCK TABLES Dim_Airline WRITE;
-INSERT INTO Dim_Airline(airline_name) VALUES ('Ryanair'),('TUI fly'),('Brussels Airlines');
+INSERT INTO Dim_Airline(airline_iata_code, airline_name) VALUES ('FR','Ryanair'),('TB','TUI fly'),('HV', 'Transavia'),('SN','Brussels Airlines');
 UNLOCK TABLES;
 
 LOCK TABLES Dim_Airport WRITE;
-INSERT INTO Dim_Airport(airport_name,airport_code,city,country) VALUES ('Brussels Airports','BRU','Zaventem','Belgium'),('Antwerp International Airport','ANR','Deurne','Belgium'),('Liege Airport','LGG','Luik','Belgium'),
-('Brussels South Charleroi Airport','CRL','Charleroi','Belgium'),('Ostend Bruges International Airport','OST','Oostende','Belgium');
-INSERT INTO Dim_Airport(airport_name,airport_code,city,country) VALUES ('Heraklion International Airport','HER','Crete','Greece'),('Corfu International Airport','CFU','Corfu','Greece'),('Rhodes International Airport','RHO','Rhodes','Greece');
-INSERT INTO Dim_Airport(airport_name,airport_code,city,country) VALUES ('Palermo Falcone-Borsellino Airport','PMO','Palermo','Italy'),('Naples Airport','NAP','Naples','Italy'),
-('Brindisi Airport','BDS','Brindisi','Italy'),('Faro Airport','FAO','Faro','Portugal');
-INSERT INTO Dim_Airport(airport_name,airport_code,city,country) VALUES ('Alicante Airport','ALC','Alicante','Spain'),('Malaga Costa Del Sol Airport','AGP','Malaga','Spain'),('Ibiza Airport','IBZ','Ibiza','Spain'),
-('Palma de Mallorca Airport','PMI','Palma','Spain'),('Tenerife South Airport','TFS','Tenerife','Spain');
+INSERT INTO Dim_Airport(airport_iata_code, airport_name, city, country) VALUES ('BRU','Brussels Airports','Zaventem','Belgium'),('ANR','Antwerp International Airport','Deurne','Belgium'),('LGG','Liege Airport','Luik','Belgium'),
+('CRL','Brussels South Charleroi Airport','Charleroi','Belgium'),('OST','Ostend Bruges International Airport','Oostende','Belgium');
+INSERT INTO Dim_Airport(airport_iata_code, airport_name, city, country) VALUES ('HER','Heraklion International Airport','Crete','Greece'),('CFU','Corfu International Airport','Corfu','Greece'),('RHO','Rhodes International Airport','Rhodes','Greece');
+INSERT INTO Dim_Airport(airport_iata_code, airport_name, city, country) VALUES ('PMO','Palermo Falcone-Borsellino Airport','Palermo','Italy'),('NAP','Naples Airport','Naples','Italy'),
+('BDS','Brindisi Airport','Brindisi','Italy'),('FAo','Faro Airport','Faro','Portugal');
+INSERT INTO Dim_Airport(airport_iata_code, airport_name, city, country) VALUES ('ALC','Alicante Airport','Alicante','Spain'),('AGP','Malaga Costa Del Sol Airport','Malaga','Spain'),('IBZ','Ibiza Airport','Ibiza','Spain'),
+('PMI','Palma de Mallorca Airport','Palma','Spain'),('TFS','Tenerife South Airport','Tenerife','Spain');
 UNLOCK TABLES;
