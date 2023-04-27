@@ -83,7 +83,7 @@ CREATE TABLE `flight` (
 DROP TABLE IF EXISTS `search_dates`;
 CREATE TABLE `search_dates` (
   `scrape_date` date NOT NULL,
-  `seats_available` INT NOT NULL,
+  `seats_available` varchar(10) NOT NULL,
   `price` double NOT NULL,
   `flight_id` varchar(255) NOT NULL,
   PRIMARY KEY (`scrape_date`, `flight_id`),

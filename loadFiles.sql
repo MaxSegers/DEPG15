@@ -33,9 +33,9 @@
 		INTO TABLE temp_tbl
 		FIELDS TERMINATED BY ','
 		LINES TERMINATED BY '\n'
-		(@flight_id, @flightnumber, @departure_date, @arrival_date, @departure_time, @arrival_time, @duration, @number_of_stops, @airline_iata_code, @departure_airport_iata_code, @arrival_airport_iata_code, @scrape_date, @seats_available, @price)
+		(@flight_id, @flightnumber, @departure_date, @arrival_date, @departure_time, @arrival_time, @duration, @number_of_stops, @airline_iata_code, @departure_airport_iata_code, @arrival_airport_iata_code, @scrape_date, @available_seats, @price)
 		SET flight_id=@flight_id, flightnumber=@flightnumber, departure_date=@departure_date, arrival_date=@arrival_date, departure_time=@departure_time, arrival_time=@arrival_time, duration=@duration, number_of_stops=@number_of_stops,
-		airline_iata_code=@airline_iata_code, departure_airport_iata_code=@departure_airport_iata_code, arrival_airport_iata_code=@arrival_airport_iata_code;
+		airline_iata_code=@airline_iata_code, departure_airport_iata_code=@departure_airport_iata_code, arrival_airport_iata_code=@arrival_airport_iata_code; 
         
         -- Merge de nieuwe data met de al bestaande data
         -- In SQL Server bestaat het commando Merge (Zie Chamilo > Relational Databases > Docmenten > Slides > 2. SQL Advanced > Slide 38 Merge
@@ -58,8 +58,8 @@
         DROP TABLE IF EXISTS `temp_tbl_2`;
 		CREATE TEMPORARY TABLE temp_tbl_2 (
 			`scrape_date` date DEFAULT NULL,
-			`seats_available` int DEFAULT NULL,
-			`price` float DEFAULT NULL,
+			`seats_available` varchar(10) DEFAULT NULL,
+			`price` double DEFAULT NULL,
             `flight_id` char(255) DEFAULT NULL
 		);
 
@@ -83,7 +83,7 @@
 		FIELDS TERMINATED BY ','
 		LINES TERMINATED BY '\r\n'
 		(@flight_id, @flightnumber, @departure_date, @arrival_date, @departure_time, @arrival_time, @duration, @number_of_stops, @airline_iata_code, @departure_airport_iata_code, @arrival_airport_iata_code, @scrape_date, @seats_available, @price)
-		SET scrape_date=@scrape_date, seats_available=@seats_available, price=@price, flight_id=@flight_id;
+		SET  scrape_date=@scrape_date, seats_available=@seats_available, price=@price, flight_id=@flight_id;
 
 		-- Door de INSERT te doen met behulp van de temporary table, worden de AUTO INCREMENT primary keys gemaakt
         INSERT INTO search_dates(scrape_date, seats_available, price, flight_id)

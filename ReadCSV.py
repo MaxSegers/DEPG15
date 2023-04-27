@@ -12,8 +12,8 @@ try:
     if conn.is_connected():
         print('connected to database')
         # choose a specific start_date
-        start_date = date(2023, 4, 6)
-        end_date = date.today()
+        start_date = date(2023, 4, 7)
+        end_date = date(2023, 4, 26)
         delta = timedelta(days=1)
         while start_date <= end_date:
 
@@ -48,8 +48,3 @@ try:
 
 except Error as e:
     print("Error while connecting to MySQL", e)
-finally:
-    if (conn.is_connected()):
-        cursor.close()
-        conn.close()
-        print("MySQL connection is closed")
