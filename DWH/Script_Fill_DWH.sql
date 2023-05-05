@@ -21,12 +21,12 @@ BEGIN
 
     -- Fill up the Dim_Date table
     WHILE curr_date <= end_date DO
-        INSERT INTO Dim_Date (date_id, fullDate, dayNumberOfWeek, nameWeekDay, numberOfQuarter, isHoliday, nameHoliday, isWeekend)
+        INSERT INTO Dim_Date (date_id, fullDate, dayNumber, nameDay, dayNumberOfWeek, weekNumber, monthNumber, nameMonth, numberOfQuarter, isHoliday, nameHoliday, isWeekend)
         VALUES (
-            CONCAT(YEAR(curr_date), LPAD(MONTH(curr_date), 2, '0'), LPAD(DAY(curr_date), 2, '0')),
-            curr_date,
-            (DAYOFWEEK(curr_date) + 5) % 7,
-            CASE WEEKDAY(curr_date)
+            CONCAT(YEAR(curr_date), LPAD(MONTH(curr_date), 2, '0'), LPAD(DAY(curr_date), 2, '0')), -- date_id
+            curr_date, -- fullDate
+            DAY(curr_date), -- dayNumber
+            CASE WEEKDAY(curr_date) -- nameDay
 				WHEN 0 THEN 'Monday'
 				WHEN 1 THEN 'Tuesday'
 				WHEN 2 THEN 'Wednesday'
@@ -35,8 +35,12 @@ BEGIN
 				WHEN 5 THEN 'Saturday'
 				WHEN 6 THEN 'Sunday'
 			END,
-            QUARTER(curr_date),
-            CASE 
+            WEEKDAY(curr_date), -- dayNumberOfWeek
+            WEEK(curr_date), -- weekNumber
+            MONTH(curr_date) , -- monthNumber
+            MONTHNAME(curr_date) , -- nameMonth
+            QUARTER(curr_date), -- numberOfQuarter
+            CASE -- isHoliday
                 WHEN MONTH(curr_date) = 1 AND DAY(curr_date) = 1 THEN TRUE
                 WHEN MONTH(curr_date) = 5 AND DAY(curr_date) = 1 THEN TRUE
                 WHEN MONTH(curr_date) = 7 AND DAY(curr_date) = 21 THEN TRUE
@@ -44,7 +48,7 @@ BEGIN
                 WHEN MONTH(curr_date) = 12 AND (DAY(curr_date) = 25 OR DAY(curr_date) = 26) THEN TRUE
                 ELSE FALSE
             END,
-            CASE 
+            CASE -- nameHoliday
                 WHEN MONTH(curr_date) = 1 AND DAY(curr_date) = 1 THEN 'New Year\'s Day'
                 WHEN MONTH(curr_date) = 5 AND DAY(curr_date) = 1 THEN 'Labour Day'
                 WHEN MONTH(curr_date) = 7 AND DAY(curr_date) = 21 THEN 'Belgian National Day'
@@ -53,7 +57,7 @@ BEGIN
                 WHEN MONTH(curr_date) = 12 AND DAY(curr_date) = 26 THEN 'Boxing Day'
                 ELSE NULL
             END,
-            CASE 
+            CASE -- isWeekend
                 WHEN (DAYOFWEEK(curr_date) + 5) % 7 IN (5, 6) THEN TRUE
                 ELSE FALSE
             END
@@ -79,10 +83,6 @@ UPDATE Dim_Airport da SET airport_name = (SELECT airport_name FROM airfares.airp
 -- Insert new records into Dim_Airport
 INSERT INTO Dim_Airport(airport_iata_code, airport_name, city, country)
 SELECT DISTINCT airport_iata_code, airport_name, place, country FROM airfares.airports WHERE airport_iata_code NOT IN (SELECT DISTINCT airport_iata_code FROM Dim_Airport);
-
--- Create trigger for inserting data in Dim_Flight, if a certain flight_key does not exist yet, it does nothing, if one of it's
--- attributes has changed, it updates the old data's end_date
-DELIMITER $$
 
 -- Inserts new records with flight_code that does not exist yet in table into Dim_Flight
 INSERT INTO Dim_Flight(flight_code, flight_number, arrival_time, departure_time, flight_duration, layovers, start_date) SELECT fl.flight_id, fl.flightnumber, fl.arrival_time, fl.departure_time, fl.duration, fl.number_of_stops, sd.scrape_date FROM airfares.flights fl JOIN airfares.search_dates sd ON fl.flight_id = sd.flight_id WHERE (fl.flight_id NOT IN (SELECT flight_code FROM dim_flight));
