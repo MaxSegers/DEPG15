@@ -34,8 +34,12 @@ CREATE TABLE IF NOT EXISTS Dim_Flight (
 CREATE TABLE IF NOT EXISTS Dim_Date (
   date_id INT PRIMARY KEY,
   fullDate DATE,
+  dayNumber INT,
+  nameDay VARCHAR(10),
   dayNumberOfWeek INT,
-  nameWeekDay VARCHAR(10),
+  weekNumber INT,
+  monthNumber INT,
+  nameMonth VARCHAR(10),
   numberOfQuarter INT,
   isHoliday BOOLEAN,
   nameHoliday VARCHAR(50),
