@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS DimFlight (
   FlightKey INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   FlightCode varchar(255) NOT NULL,
   FlightNumber varchar(10) NOT NULL,
-  ArrivalTime DATETIME NOT NULL,
-  DepartureTime DATETIME NOT NULL,
+  ArrivalTime varchar(10) NOT NULL,
+  DepartureTime varchar(10) NOT NULL,
   Duration int NOT NULL,
   NumberOfStops INT NOT NULL,
   
