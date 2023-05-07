@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS DimFlight (
   FlightNumber varchar(10) NOT NULL,
   ArrivalTime varchar(10) NOT NULL,
   DepartureTime varchar(10) NOT NULL,
-  Duration int NOT NULL,
+  Duration varchar(10) NOT NULL,
   NumberOfStops INT NOT NULL,
   
   -- Voor de slowly changing dimension
